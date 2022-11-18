@@ -98,7 +98,7 @@ class ParseArticleCommand extends Command
                         $io->note(sprintf('published : %s', $count));
                         $data = [
                             'title' => strval($titles[$key]->textContent),
-                            'desc' => empty($desc) ? null : $desc,
+                            'desc' => empty($desc) ? "..." : $desc,
                             'image' => $image
                         ];
                         $this->bus->dispatch(new CreateArticle($data));

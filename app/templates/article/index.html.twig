@@ -13,34 +13,30 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-2">
-            </div>
-            <div class="col-8">
             <div class="count">
-                {{ pagination.getTotalItemCount }}
+                <a name="btn" id="btn" class="btn btn-primary" href="#" role="button">Total Articles :{{ pagination.getTotalItemCount }}</a> 
             </div>
-            <ul>
-            {% if pagination %}
-                {% for article in pagination %}
-                    <div class="card" style="width: 18rem;">
-                        <img src={{ article.picture }} class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ article.title }}</h5>
-                            <p class="card-text">{{ article.description }}</p>
-                            <small>{{ article.created_at | date('Y-m-d') }}</small>
+            <div class="col-12">
+                <ul>
+                {% if pagination %}
+                    {% for article in pagination %}
+                        <div class="card mb-2" style="width: 18rem;">
+                            <img src={{ article.picture }} class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ article.title }}</h5>
+                                <p class="card-text">{{ article.description }}</p>
+                                <small>{{ article.createdAt | date('Y-m-d') }}</small>
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
-            {% else %}  
-                <h1> No Article </h1>  
-            {% endif %}
-            </ul>
+                    {% endfor %}
+                {% else %}  
+                    <h1> No Article </h1>  
+                {% endif %}
+                </ul>
+            </div>
             {# display navigation #}
             <div class="navigation">
                 {{ knp_pagination_render(pagination) }}
-            </div>
-            </div>
-            <div class="col-2">
             </div>
         </div>
     </div>
