@@ -9,10 +9,6 @@ Dockerized Symfony App
   MySql 8.0
   Bootstrap
 ## Installation
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-- Installation
-
   - - docker compose up -d build
   - - localhost:8080 - to view web app list of articles with pagination
   - - docker compose up -d build
