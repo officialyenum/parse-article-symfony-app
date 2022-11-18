@@ -1,5 +1,5 @@
 # Parse-article-symfony-app
-Dockerized Symfony App
+Dockerized Symfony App for Parse article to rabbitmq and consuming to MySQL DB
 
 ## Specification
   Symfony 5.4
@@ -11,8 +11,9 @@ Dockerized Symfony App
   
 ## Installation
   - - create 'mysql' and 'rabbitmq' folder, for docker to build into
+  - - Please Ensure you have docker running on your system
+  - - docker-compose up -d --build
   - - localhost:8080 - to view web app list of articles with pagination
-  - - docker compose up -d build
   - - docker-compose run --rm node-service yarn install - To use node to install yarn/npm into the project
   - - docker-compose run --rm node-service yarn add bootstrap --dev - To install bootstrap
   - - docker exec -it php74-container bash - To access symfony php74 container terminal
