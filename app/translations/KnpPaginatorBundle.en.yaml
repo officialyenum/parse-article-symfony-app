@@ -1,0 +1,4 @@
+framework:
+    default_locale: en
+label_next: Next
+label_previous: Previous

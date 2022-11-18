@@ -18,6 +18,7 @@ Dockerized Symfony App for Parse article to rabbitmq and consuming to MySQL DB
   - - docker-compose run --rm node-service yarn add bootstrap --dev - To install bootstrap
   - - docker exec -it php74-container bash - To access symfony php74 container terminal
   - [PHP74 terminal]() - composer update - updates composer.json
+  - [PHP74 terminal]() - php bin/console doctrine:migrations:migrate - this will migrate your db
   
 
 ## Running the project

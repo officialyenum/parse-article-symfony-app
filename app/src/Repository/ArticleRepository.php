@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Article;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Query;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Article>
@@ -16,8 +18,10 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ArticleRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    protected $paginator;
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
+        $this->paginator = $paginator;
         parent::__construct($registry, Article::class);
     }
 
@@ -42,17 +46,17 @@ class ArticleRepository extends ServiceEntityRepository
    /**
     * @return Article[] Returns an array of Article objects
     */
-   public function findByExampleField($value): array
-   {
-       return $this->createQueryBuilder('a')
-           ->andWhere('a.exampleField = :val')
-           ->setParameter('val', $value)
-           ->orderBy('a.id', 'ASC')
-           ->setMaxResults(10)
-           ->getQuery()
-           ->getResult()
-       ;
-   }
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('a')
+//            ->andWhere('a.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('a.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
 
    /**
     * @return Article[] Returns an array of Article objects
@@ -67,6 +71,17 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+    * @return Query Returns a query of Article objects
+    */
+    public function findAllQuery()
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.id', 'ASC')
+            ->getQuery()
+        ;
+    }
+
    public function findOneByTitle($value): ?Article
    {
        return $this->createQueryBuilder('a')
@@ -76,4 +91,20 @@ class ArticleRepository extends ServiceEntityRepository
            ->getOneOrNullResult()
        ;
    }
+
+   public function findAllPaginated(int $page)
+    {
+        $query = $this->createQueryBuilder('a')
+        ->orderBy('a.id', 'ASC')
+        ->getQuery();
+
+        $pagination = $this->paginator->paginate(
+            $query, /* query NOT result */
+            $page, /*page number*/
+            10 /*limit per page*/
+        );
+        // returns an array of Product objects
+        return $pagination;
+    }
+
 }

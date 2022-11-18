@@ -20,6 +20,7 @@
                 {{ pagination.getTotalItemCount }}
             </div>
             <ul>
+            {% if pagination %}
                 {% for article in pagination %}
                     <div class="card" style="width: 18rem;">
                         <img src={{ article.picture }} class="card-img-top" alt="...">
@@ -30,7 +31,9 @@
                         </div>
                     </div>
                 {% endfor %}
-                
+            {% else %}  
+                <h1> No Article </h1>  
+            {% endif %}
             </ul>
             {# display navigation #}
             <div class="navigation">

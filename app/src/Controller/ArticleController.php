@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\ArticleRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,36 +13,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ArticleController extends AbstractController
 {
     protected $articleRepo;
+
     public function __construct(ArticleRepository $articleRepo)
     {
-        # code...
         $this->articleRepo = $articleRepo;
     }
     /**
-     * @Route("/article", name="app_article")
+     * @Route("/", name="app_article")
      */
-    public function index(): Response
+    public function index(PaginatorInterface $paginator, Request $request): Response
     {
-        $articles = $this->articleRepo->findAll();
-        return $this->render('article/index.html.twig', [
-            'controller_name' => 'ArticleController',
-            'articles' => $articles
-        ]);
-    }
-
-    public function listAction(EntityManagerInterface $em, PaginatorInterface $paginator, Request $request)
-    {
-        $dql   = "SELECT a FROM AcmeMainBundle:Article a";
-        $query = $em->createQuery($dql);
-
-        $articles = $this->articleRepo->findAll();
-
-        $pagination = $paginator->paginate(
-            $query, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
-        );
-
+        $pagination = $this->articleRepo->findAllPaginated($request->query->getInt('page', 1));
         // parameters to template
         return $this->render('article/index.html.twig', [
             'controller_name' => 'ArticleController',
