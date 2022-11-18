@@ -8,15 +8,27 @@ Dockerized Symfony App
   rabbitmq 3.8
   MySql 8.0
   Bootstrap
+  
 ## Installation
-  - - docker compose up -d build
+  - - create 'mysql' and 'rabbitmq' folder, for docker to build into
   - - localhost:8080 - to view web app list of articles with pagination
   - - docker compose up -d build
-  - - docker compose up -d build
-  - - docker exec -it php74-container bash - To access symfony php app
-  - php74 terminal - composer update - updates composer.json
-  - php74 terminal - symfony console messenger:consume -vv - To open rabbit mq queue worker
-  - php74 terminal - php bin/console parse:article - To scrape url for articles and publish to rabbit mq
-  - docker-compose run --rm node-service yarn install - To install node and yarn/npm
-  - docker-compose run --rm node-service yarn add bootstrap --dev - To install bootstrap
+  - - docker-compose run --rm node-service yarn install - To use node to install yarn/npm into the project
+  - - docker-compose run --rm node-service yarn add bootstrap --dev - To install bootstrap
+  - - docker exec -it php74-container bash - To access symfony php74 container terminal
+  - [PHP74 terminal]() - composer update - updates composer.json
   
+
+## Running the project
+  - - docker exec -it php74-container bash - To access symfony php74 container terminal
+  - - localhost:8080 - to view web app list of articles with pagination
+  - [PHP74 terminal]() - symfony console messenger:consume -vv - To open and listen to rabbit mq queue worker
+  - [PHP74 terminal]() - php bin/console parse:article - To scrape url for articles and publish
+
+## Security Vulnerabilities
+
+If you discover a security vulnerability within this project, please send an e-mail to Opone Chukwuyenum via [oponechukwuyenum@gmail.com](mailto:oponechukwuyenum@gmail.com). All security vulnerabilities will be promptly addressed.
+
+## License
+
+The Parse Article App software licensed under the [MIT license](https://opensource.org/licenses/MIT).
