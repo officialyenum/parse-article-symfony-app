@@ -23,12 +23,6 @@ class ArticleAdminController extends AbstractController
         return $this->render('admin/article/index.html.twig', [
             'articles' => $articleRepository->findAllPaginated($request->query->getInt('page', 1)),
         ]);
-        $pagination = $this->articleRepo->findAllPaginated($request->query->getInt('page', 1));
-        // parameters to template
-        return $this->render('article/index.html.twig', [
-            'controller_name' => 'ArticleController',
-            'pagination' => $pagination
-        ]);
     }
 
     /**

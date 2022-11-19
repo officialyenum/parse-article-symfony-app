@@ -27,9 +27,12 @@ Dockerized Symfony App for Parse article to rabbitmq and consuming to MySQL DB
 
 ## Running the project
   - - docker exec -it php74-container bash - To access symfony php74 container terminal
-  - - localhost:8080 - to view web app list of articles with pagination
+  - - http://localhost:8080 - to view web app list of articles with pagination
+  - - http://localhost:8080/admin/article/ - to view admin app list of articles with pagination and delete feature
   - [PHP74 terminal]() - symfony console messenger:consume -vv - To open and listen to rabbit mq queue worker
   - [PHP74 terminal]() - php bin/console parse:article - To scrape url for articles and publish
+
+
 
 ## Security Vulnerabilities
 
